@@ -2,17 +2,17 @@
 
 Sem prazo fixo. As fases avançam quando os critérios de saída são cumpridos.
 
-## Fase 0 — Fundação *(atual)*
+## Fase 0 — Fundação *(concluída)*
 - [x] Estrutura de pastas e documentação
 - [x] Repositório git local
-- [ ] Repositório público no GitHub
-- [ ] Spike S10 — GitHub Issues e Projects
-- [ ] Templates de issue e board do projeto
+- [x] Repositório público no GitHub
+- [x] Spike S10 — GitHub Issues e Projects
+- [x] Templates de issue e board do projeto
 - [x] Decisão da licença (ADR-004: sem licença por agora)
 
 **Saída:** repositório no GitHub com as primeiras issues criadas.
 
-## Fase 1 — Spikes e decisões
+## Fase 1 — Spikes e decisões *(atual)*
 Ordem sugerida: S7 → S1 → S3 → S5 → S4 → S2 → S6 → S8 (S9 em paralelo).
 Fechar as decisões D4–D21 à medida que os spikes concluem.
 
