@@ -16,6 +16,7 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [005](#adr-005--fins-de-linha-lf-em-todo-o-repositório) | Fins de linha LF em todo o repositório | Aceite | 2026-11-24 |
 | [006](#adr-006--ambiente-de-desenvolvimento-android-studio--claude-code) | Ambiente de desenvolvimento: Android Studio + Claude Code | Aceite | 2026-11-24 |
 | [007](#adr-007--política-de-merge-o-claude-faz-merge-após-aprovação-explícita) | Política de merge: o Claude faz merge após aprovação explícita | Aceite | 2026-11-24 |
+| [008](#adr-008--ci-um-único-job-gradle-no-github-actions) | CI: um único job Gradle no GitHub Actions | Aceite | 2026-11-24 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
@@ -35,7 +36,6 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | D16 | Testes unitários | — |
 | D17 | Testes de UI | S8 |
 | D18 | Lint e formatação | — |
-| D19 | Detalhes do CI | S7 |
 | D20 | Atualização de dependências | — |
 | D21 | Avaliação da LLM (evals) | S1 |
 | D-DIAG | Ferramenta de diagramas | — |
@@ -256,3 +256,36 @@ a opção 3 ou uma combinação (CI verde obrigatório + aprovação em chat).
   não vale para outros PRs.
 - Merge sempre em *squash*; a branch é apagada.
 - Quando o CI existir, a proteção da `main` exige os checks verdes.
+
+---
+
+## ADR-008 — CI: um único job Gradle no GitHub Actions
+- **Estado:** Aceite
+- **Data:** 2026-11-24
+- **Spike relacionado:** [docs/spikes/007-github-actions-ci.md](spikes/007-github-actions-ci.md) (#3)
+
+### Contexto
+O spike S7 mostrou que um CI Android (build + testes unitários + lint) demora
+~1 min 20 s com cache e é gratuito num repositório público. Falta decidir a
+forma do workflow definitivo (decisão D19).
+
+### Opções consideradas
+1. **Um job, uma invocação do Gradle**
+   (`./gradlew assembleDebug testDebugUnitTest lintDebug`) — mais simples e
+   mais rápido no total (uma configuração e um restauro de cache). Contra:
+   um só check no PR; é preciso ver o log para saber que passo falhou.
+2. **Três jobs paralelos** (build, testes, lint) — checks separados no PR.
+   Contra: cada job restaura ~600 MB de cache e configura o Gradle; mais
+   lento no total para um projeto pequeno; mais complexo.
+
+### Decisão
+**Um único job** (opção 1). Rever para jobs paralelos se o build ficar lento.
+
+### Consequências
+- O workflow corre em `pull_request` **e** em `push` na `main` (só a `main`
+  grava a cache do Gradle; os PRs reutilizam-na em modo só de leitura).
+- JDK igual ao `toolchainVersion` de `gradle/gradle-daemon-jvm.properties`.
+- `gradlew` com permissão de execução no git.
+- A proteção da `main` passa a exigir este check verde.
+- O workflow é criado na Fase 2, com o projeto Android definitivo; nessa altura
+  revê-se a ADR-007 (auto-merge).

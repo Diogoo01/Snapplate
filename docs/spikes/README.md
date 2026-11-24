@@ -11,7 +11,7 @@ do [template](_template.md).
 | S4 | [#7](https://github.com/Diogoo01/Snapplate/issues/7) | As receitas geradas são coerentes e as calorias calculadas são plausíveis? | 4 h | Por iniciar |
 | S5 | [#6](https://github.com/Diogoo01/Snapplate/issues/6) | O Firebase AI Logic com App Check protege a chave sem backend? | 3 h | Por iniciar |
 | S6 | [#9](https://github.com/Diogoo01/Snapplate/issues/9) | Photo Picker vs CameraX: que tamanho/compressão de imagem? | 2 h | Por iniciar |
-| S7 | [#3](https://github.com/Diogoo01/Snapplate/issues/3) | Quanto custa (tempo) um CI Android no GitHub Actions? | 2 h | Por iniciar |
+| S7 | [#3](https://github.com/Diogoo01/Snapplate/issues/3) | Quanto custa (tempo) um CI Android no GitHub Actions? | 2 h | [Concluído](007-github-actions-ci.md) |
 | S8 | [#10](https://github.com/Diogoo01/Snapplate/issues/10) | Screenshot tests com Roborazzi correm bem no CI? | 2 h | Por iniciar |
 | S9 | [#11](https://github.com/Diogoo01/Snapplate/issues/11) | Que skills/subagentes do Claude Code são úteis neste projeto? | 2 h | Por iniciar |
 | S10 | [#1](https://github.com/Diogoo01/Snapplate/issues/1) | O fluxo GitHub Issues + Projects funciona para nós? | 1 h | [Concluído](010-github-issues.md) |

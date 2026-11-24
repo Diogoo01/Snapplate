@@ -21,7 +21,7 @@ primeiro diagrama atualizados.
 
 ## Fase 2 — Esqueleto da app
 - Projeto Android criado com a stack escolhida
-- CI no GitHub Actions (build, testes unitários, lint) com proteção da `main`
+- CI no GitHub Actions segundo a ADR-008 (um job: build, testes unitários, lint) com proteção da `main`; rever ADR-007 (auto-merge)
 - Skills e subagentes iniciais do Claude Code
 
 **Saída:** app "vazia" a compilar e CI verde em cada PR.
