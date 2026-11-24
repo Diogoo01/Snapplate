@@ -1,0 +1,37 @@
+# --- Gradle / Android ---
+.gradle/
+build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# --- Ficheiros locais e segredos (NUNCA commitar) ---
+local.properties
+secrets.properties
+*.keystore
+*.jks
+.env
+.env.*
+# Configuração Firebase: decidir em spike (S5) se pode ser commitada
+google-services.json
+
+# --- IDE ---
+.idea/
+*.iml
+.vscode/
+.kotlin/
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Avaliações da LLM: fotos pessoais ficam só localmente ---
+evals/photos/
+
+# --- Claude Code: definições pessoais ---
+.claude/settings.local.json
