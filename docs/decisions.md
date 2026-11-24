@@ -13,6 +13,7 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [002](#adr-002--estratégia-de-branches-github-flow) | Estratégia de branches: GitHub Flow | Aceite | 2026-11-24 |
 | [003](#adr-003--repositório-público) | Repositório público | Aceite | 2026-11-24 |
 | [004](#adr-004--sem-licença-por-agora) | Sem licença (por agora) | Aceite | 2026-11-24 |
+| [005](#adr-005--fins-de-linha-lf-em-todo-o-repositório) | Fins de linha LF em todo o repositório | Aceite | 2026-11-24 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
@@ -164,3 +165,31 @@ um ficheiro `LICENSE` (nova ADR que substitui esta).
 
 ### Consequências
 - Não se cria ficheiro `LICENSE`; o repositório é criado sem licença.
+
+---
+
+## ADR-005 — Fins de linha LF em todo o repositório
+- **Estado:** Aceite
+- **Data:** 2026-11-24
+- **Issue:** #2
+
+### Contexto
+O desenvolvimento é feito em Windows (CRLF) e o CI corre em Linux (LF). Scripts
+como o `gradlew` falham com CRLF, e o git mostra avisos LF/CRLF a cada commit.
+
+### Opções consideradas
+1. **Tudo em LF** (`* text=auto eol=lf`, exceto `.bat`/`.cmd` em CRLF) — disco,
+   repositório e CI iguais; acaba com os avisos. Contra: programas Windows muito
+   antigos podem mostrar mal ficheiros LF.
+2. **Nativo por sistema** (`* text=auto` + exceções para scripts) — CRLF no
+   Windows. Contra: disco ≠ repositório; avisos continuam; cada script novo
+   precisa de exceção.
+3. **Mínima** (só `gradlew` em LF + binários) — simples. Contra: não resolve os
+   avisos nem garante consistência.
+
+### Decisão
+**Tudo em LF** (opção 1), via `.gitattributes`.
+
+### Consequências
+- O `.gitattributes` na raiz define as regras, incluindo ficheiros binários.
+- Ficheiros novos ficam em LF no disco, mesmo em Windows.
