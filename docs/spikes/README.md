@@ -14,7 +14,7 @@ do [template](_template.md).
 | S7 | [#3](https://github.com/Diogoo01/Snapplate/issues/3) | Quanto custa (tempo) um CI Android no GitHub Actions? | 2 h | Por iniciar |
 | S8 | [#10](https://github.com/Diogoo01/Snapplate/issues/10) | Screenshot tests com Roborazzi correm bem no CI? | 2 h | Por iniciar |
 | S9 | [#11](https://github.com/Diogoo01/Snapplate/issues/11) | Que skills/subagentes do Claude Code são úteis neste projeto? | 2 h | Por iniciar |
-| S10 | [#1](https://github.com/Diogoo01/Snapplate/issues/1) | O fluxo GitHub Issues + Projects funciona para nós? | 1 h | Em curso |
+| S10 | [#1](https://github.com/Diogoo01/Snapplate/issues/1) | O fluxo GitHub Issues + Projects funciona para nós? | 1 h | [Concluído](010-github-issues.md) |
 
 Os critérios de sucesso detalhados estão em cada issue. Ordem sugerida:
 S10 → S7 → S1 → S3 → S5 → S4 → S2 → S6 → S8 (S9 em paralelo).
