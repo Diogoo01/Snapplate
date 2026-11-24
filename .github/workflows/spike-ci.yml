@@ -33,6 +33,10 @@ jobs:
 
       - name: Set up Gradle (wrapper validation + cache)
         uses: gradle/actions/setup-gradle@v6
+        with:
+          # Spike only: allow writing the cache from this branch to measure its effect.
+          # By default the cache is only written from the default branch (main).
+          cache-read-only: false
 
       - name: Build
         run: ./gradlew assembleDebug
