@@ -1,0 +1,11 @@
+{
+  "_instrucoes": "Uma entrada por foto (nome exato do ficheiro em evals/photos/). Em 'ingredients', a chave é o nome do ingrediente e a lista são sinónimos aceites. Apaga este exemplo quando tiveres as tuas fotos.",
+  "exemplo-01.jpg": {
+    "ingredients": {
+      "leite": [],
+      "ovo": ["ovos"],
+      "tomate": ["tomates", "tomate cherry"],
+      "queijo": ["queijo flamengo", "queijo fatiado"]
+    }
+  }
+}

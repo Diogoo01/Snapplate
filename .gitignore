@@ -35,3 +35,6 @@ evals/photos/
 
 # --- Claude Code: definições pessoais ---
 .claude/settings.local.json
+
+# Spike S1: generated results
+spike-s1/results/
