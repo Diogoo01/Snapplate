@@ -14,6 +14,8 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [003](#adr-003--repositório-público) | Repositório público | Aceite | 2026-11-24 |
 | [004](#adr-004--sem-licença-por-agora) | Sem licença (por agora) | Aceite | 2026-11-24 |
 | [005](#adr-005--fins-de-linha-lf-em-todo-o-repositório) | Fins de linha LF em todo o repositório | Aceite | 2026-11-24 |
+| [006](#adr-006--ambiente-de-desenvolvimento-android-studio--claude-code) | Ambiente de desenvolvimento: Android Studio + Claude Code | Aceite | 2026-11-24 |
+| [007](#adr-007--política-de-merge-o-claude-faz-merge-após-aprovação-explícita) | Política de merge: o Claude faz merge após aprovação explícita | Aceite | 2026-11-24 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
@@ -193,3 +195,64 @@ como o `gradlew` falham com CRLF, e o git mostra avisos LF/CRLF a cada commit.
 ### Consequências
 - O `.gitattributes` na raiz define as regras, incluindo ficheiros binários.
 - Ficheiros novos ficam em LF no disco, mesmo em Windows.
+
+---
+
+## ADR-006 — Ambiente de desenvolvimento: Android Studio + Claude Code
+- **Estado:** Aceite
+- **Data:** 2026-11-24
+- **Issue:** #13
+
+### Contexto
+É preciso escolher onde se escreve, corre e depura a app, e que assistentes de
+IA se usam, sem custos e sem duplicar ferramentas.
+
+### Opções consideradas
+1. **Android Studio + Claude Code** — IDE oficial para Android (emulador,
+   previews do Compose, debugger, Gradle); um único agente de IA; o Claude Code
+   tem extensão para IDEs JetBrains. Contra: dois programas abertos.
+2. **Opção 1 + Gemini in Android Studio** — autocomplete e ajuda contextual
+   gratuitos. Contra: dois assistentes de IA.
+3. **Cursor para editar + Android Studio para correr** — ferramenta popular.
+   Contra: dois editores e dois agentes; suporte fraco a Kotlin/Android;
+   limites do plano gratuito.
+
+### Decisão
+**Android Studio + Claude Code.**
+
+### Consequências
+- O Android Studio é o IDE para correr, depurar e ver previews.
+- O Claude Code é o único agente de IA que altera código no projeto.
+- Revisitável se surgir interesse em comparar outras ferramentas (via spike).
+
+---
+
+## ADR-007 — Política de merge: o Claude faz merge após aprovação explícita
+- **Estado:** Aceite
+- **Data:** 2026-11-24
+- **Issue:** #13
+
+### Contexto
+Com o GitHub Flow (ADR-002), cada task termina num PR. A trabalhar a solo, o
+GitHub não permite que o autor aprove o próprio PR, por isso uma regra de
+"aprovação obrigatória" na `main` não é utilizável.
+
+### Opções consideradas
+1. **O utilizador faz sempre o merge** no GitHub — controlo total. Contra:
+   trabalho manual repetido.
+2. **O Claude faz o merge após aprovação explícita do utilizador em cada PR**
+   — o utilizador continua a rever e a decidir; o merge é automático.
+   Contra: a revisão do diff continua a ser necessária (e desejável).
+3. **Auto-merge do GitHub** quando o CI passa — padrão em equipas com CI forte.
+   Contra: sem CI ainda não tem efeito; o CI passa a ser a única barreira.
+
+### Decisão
+**Opção 2 agora.** Quando existir CI forte (depois do spike S7, #3), rever para
+a opção 3 ou uma combinação (CI verde obrigatório + aprovação em chat).
+
+### Consequências
+- O Claude só corre `gh pr merge --squash --delete-branch` depois de o
+  utilizador escrever explicitamente que aprova **aquele** PR. Uma aprovação
+  não vale para outros PRs.
+- Merge sempre em *squash*; a branch é apagada.
+- Quando o CI existir, a proteção da `main` exige os checks verdes.

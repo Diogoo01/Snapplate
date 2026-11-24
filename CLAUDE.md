@@ -21,6 +21,13 @@ de refeições com calorias por dose. Projeto a solo, de aprendizagem
    e condições (incluindo uso de dados) nos spikes.
 6. **Propor ferramentas atuais da indústria**; sugerir skills/subagentes só
    onde acrescentam valor.
+7. **Merge só com aprovação explícita** (ADR-007): o Claude faz
+   `gh pr merge --squash --delete-branch` apenas depois de o utilizador
+   aprovar **esse** PR por escrito. Uma aprovação não vale para outros PRs.
+
+## Ambiente (ADR-006)
+Android Studio para correr, depurar e ver previews; Claude Code como único
+agente de IA a alterar código.
 
 ## Idioma
 - Documentação, issues e PRs: **português (PT-PT)**.
