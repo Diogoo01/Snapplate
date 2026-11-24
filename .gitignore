@@ -38,3 +38,7 @@ evals/photos/
 
 # Spike S1: generated results
 spike-s1/results/
+
+# --- Python ---
+__pycache__/
+*.pyc
