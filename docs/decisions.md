@@ -12,11 +12,11 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [001](#adr-001--gestão-de-tasks-no-github-issues--projects) | Gestão de tasks no GitHub Issues + Projects | Aceite | 2026-11-24 |
 | [002](#adr-002--estratégia-de-branches-github-flow) | Estratégia de branches: GitHub Flow | Aceite | 2026-11-24 |
 | [003](#adr-003--repositório-público) | Repositório público | Aceite | 2026-11-24 |
+| [004](#adr-004--sem-licença-por-agora) | Sem licença (por agora) | Aceite | 2026-11-24 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
 |---|---|---|
-| D-LIC | Licença do código | — |
 | D4 | UI (Compose vs Views) | — |
 | D5 | Arquitetura da app | — |
 | D6 | Modularização | — |
@@ -138,5 +138,29 @@ Android são pesadas. O projeto é de aprendizagem.
 - Segredos do CI só em GitHub Secrets.
 - Secret scanning e push protection ativos no repositório.
 - Fotos pessoais nunca vão para o repositório.
-- A licença fica por decidir (D-LIC); sem licença, o código fica com todos os
-  direitos reservados.
+- A licença é tratada na ADR-004.
+
+---
+
+## ADR-004 — Sem licença (por agora)
+- **Estado:** Aceite
+- **Data:** 2026-11-24
+
+### Contexto
+O repositório é público (ADR-003). Sem ficheiro `LICENSE`, o código fica com
+todos os direitos reservados: pode ser visto, mas não copiado nem reutilizado.
+
+### Opções consideradas
+1. **Sem licença** — opção por omissão; o autor mantém todos os direitos.
+   Contra: ninguém pode reutilizar o código legalmente.
+2. **MIT** — permissiva e a mais comum; só exige manter a atribuição.
+   Contra: qualquer pessoa pode reutilizar, incluindo comercialmente.
+3. **Apache-2.0** — como a MIT, com cláusula explícita de patentes.
+   Contra: mais longa; pouco relevante para um projeto pessoal.
+
+### Decisão
+**Sem licença por agora.** Pode ser revista a qualquer momento acrescentando
+um ficheiro `LICENSE` (nova ADR que substitui esta).
+
+### Consequências
+- Não se cria ficheiro `LICENSE`; o repositório é criado sem licença.

@@ -8,7 +8,7 @@ Sem prazo fixo. As fases avançam quando os critérios de saída são cumpridos.
 - [ ] Repositório público no GitHub
 - [ ] Spike S10 — GitHub Issues e Projects
 - [ ] Templates de issue e board do projeto
-- [ ] Decisão da licença (D-LIC)
+- [x] Decisão da licença (ADR-004: sem licença por agora)
 
 **Saída:** repositório no GitHub com as primeiras issues criadas.
 
