@@ -7,8 +7,11 @@
 3. **Trabalho** — commits pequenos (Conventional Commits).
 4. **PR** — descrição com `Closes #NN` e checklist do critério de aceitação.
 5. **CI** — build, testes unitários e lint têm de passar.
-6. **Revisão** — o utilizador revê e aprova (no futuro, também um subagente revisor).
-7. **Merge** — squash merge na `main`; a branch é apagada.
+6. **Revisão** — o utilizador revê o diff e aprova por escrito (ex.: "aprovado")
+   (no futuro, também um subagente revisor).
+7. **Merge** — o Claude faz squash merge na `main` e apaga a branch, só depois
+   da aprovação explícita desse PR (ADR-007). A issue fecha e passa a *Done*
+   no board automaticamente.
 
 ## Decisões
 Sempre que surge uma escolha técnica: 2–3 opções com prós e contras →
