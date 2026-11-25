@@ -327,6 +327,9 @@ ponto de partida.
   poder trocar de modelo (ex.: OpenRouter) sem mexer no resto.
 - A app trata 503/429 com novas tentativas com espera e uma mensagem clara.
 - A proteção da chave depende do S5 (Firebase AI Logic / D12).
+- Os limites gratuitos são por projeto e partilhados por todos os
+  utilizadores: **15 pedidos/min e 500 pedidos/dia** (1 foto = 1 pedido).
+  Suficiente para desenvolvimento e testers; a rever antes de publicar.
 - **Risco aceite:** antes de publicar para utilizadores no EEE é preciso rever
   a restrição dos termos (plano pago, outro fornecedor ou distribuição
   limitada). Para desenvolvimento e aprendizagem, o plano gratuito serve.

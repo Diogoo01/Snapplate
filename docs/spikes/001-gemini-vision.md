@@ -109,7 +109,20 @@ Fontes: [Rate limits](https://aistudio.google.com/docs/rate-limits),
 - **Limites por projeto, não por chave**; o limite diário reinicia à
   meia-noite (hora do Pacífico). Os valores exatos do plano gratuito por modelo
   só aparecem na consola do AI Studio (página *Rate limit*), não na
-  documentação pública.
+  documentação pública. Valores vistos na consola a 2026-11-25:
+
+  | Modelo | RPM | TPM | RPD | Uso no dia do spike |
+  |---|---|---|---|---|
+  | gemini-3.5-flash-lite | 15 | 250 000 | **500** | 48 pedidos, ~7 300 tokens/min no pico |
+  | gemini-3.8-flash | 5 | 250 000 | 20 | 23/20 (limite diário ultrapassado) |
+
+- ⚠️ **Os limites são partilhados por todos os utilizadores da app**, porque
+  são por projeto. Com o flash-lite, a app inteira fica limitada a **500 fotos
+  por dia** e 15 por minuto. Chega para desenvolvimento e para um grupo pequeno
+  de testers; é um ponto a considerar no S5 (proteção da chave) e antes de
+  publicar.
+- Uma foto gasta poucos tokens face ao limite de 250 000/min: o limite que
+  aperta é o número de pedidos, não os tokens.
 - **Uso dos dados:** fora do EEE, o plano gratuito pode usar as fotos e
   respostas para melhorar os produtos da Google, com revisão humana. **No EEE,
   Suíça e Reino Unido** aplicam-se os termos de dados do plano pago a todo o
