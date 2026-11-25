@@ -1,11 +1,212 @@
 {
-  "_instrucoes": "Uma entrada por foto (nome exato do ficheiro em evals/photos/). Em 'ingredients', a chave é o nome do ingrediente e a lista são sinónimos aceites. Apaga este exemplo quando tiveres as tuas fotos.",
-  "exemplo-01.jpg": {
+  "_instrucoes": "Uma entrada por foto (nome do ficheiro em evals/photos/). Em 'ingredients', a chave é o ingrediente e a lista são sinónimos aceites. Itens não confirmados pelo utilizador (conteúdo de tupperwares, Knorr, açúcar, frasco amarelo) ficam de fora: se um modelo os referir, contam como 'extra' e são revistos à mão.",
+  "foto-01.jpg": {
+    "_descricao": "Armário com massas",
     "ingredients": {
-      "leite": [],
-      "ovo": ["ovos"],
-      "tomate": ["tomates", "tomate cherry"],
-      "queijo": ["queijo flamengo", "queijo fatiado"]
-    }
+      "esparguete": [
+        "massa esparguete",
+        "spaghetti"
+      ],
+      "massa": [
+        "macarrão",
+        "cotovelos",
+        "penne",
+        "massa curta",
+        "macaroni"
+      ],
+      "arroz": [],
+      "lasanha": [
+        "massa de lasanha",
+        "folhas de lasanha"
+      ]
+    },
+    "_duvidas": []
+  },
+  "foto-02.jpg": {
+    "_descricao": "Despensa, pouca luz",
+    "ingredients": {
+      "óleo": [
+        "óleo alimentar",
+        "óleo vegetal"
+      ],
+      "grão-de-bico": [
+        "grão",
+        "grão de bico"
+      ],
+      "vinho branco": [
+        "vinho"
+      ],
+      "cuscuz": [
+        "couscous"
+      ],
+      "chá": [
+        "chá preto"
+      ],
+      "polpa de tomate": [
+        "tomate",
+        "molho de tomate"
+      ],
+      "natas de soja": [
+        "natas",
+        "natas vegetais",
+        "bebida de soja"
+      ],
+      "azeite": []
+    },
+    "_duvidas": []
+  },
+  "foto-03.jpg": {
+    "_descricao": "Despensa, prateleira de cima com pacotes",
+    "ingredients": {
+      "farinha": [
+        "farinha T65",
+        "farinha de trigo"
+      ],
+      "massa": [
+        "macarrão",
+        "massa curta"
+      ],
+      "ovo": [
+        "ovos"
+      ],
+      "óleo": [
+        "óleo alimentar",
+        "óleo vegetal"
+      ],
+      "grão-de-bico": [
+        "grão",
+        "grão de bico"
+      ],
+      "vinho branco": [
+        "vinho"
+      ],
+      "cuscuz": [
+        "couscous"
+      ],
+      "chá": [
+        "chá preto"
+      ],
+      "natas de soja": [
+        "natas",
+        "natas vegetais",
+        "bebida de soja"
+      ],
+      "aveia": [
+        "flocos de aveia",
+        "cereais"
+      ],
+      "arroz": [],
+      "azeite": [],
+      "leite": [
+        "pacote de leite"
+      ]
+    },
+    "_duvidas": []
+  },
+  "foto-04.jpg": {
+    "_descricao": "Frigorífico, prateleira de perto",
+    "ingredients": {
+      "carne picada": [
+        "carne",
+        "carne moída"
+      ],
+      "pudim": [
+        "pudim de caramelo",
+        "sobremesa"
+      ],
+      "leite": [
+        "leite proteína",
+        "bebida láctea"
+      ],
+      "azeitona": [
+        "azeitonas"
+      ],
+      "tomate": [],
+      "mousse de chocolate": [
+        "mousse",
+        "sobremesa de chocolate"
+      ]
+    },
+    "_duvidas": []
+  },
+  "foto-05.jpg": {
+    "_descricao": "Porta do frigorífico (inclui um medicamento, que NÃO é ingrediente)",
+    "ingredients": {
+      "maionese": [],
+      "ketchup": [],
+      "molho de queijo": [
+        "salsa de queijo",
+        "queijo"
+      ],
+      "molho de tomate": [
+        "polpa de tomate",
+        "tomate"
+      ],
+      "água com gás": [
+        "água",
+        "água mineral"
+      ]
+    },
+    "_duvidas": []
+  },
+  "foto-06.jpg": {
+    "_descricao": "Frigorífico, vista geral",
+    "ingredients": {
+      "gelatina": [],
+      "pudim": [
+        "pudim de caramelo",
+        "sobremesa"
+      ],
+      "carne picada": [
+        "carne",
+        "carne moída"
+      ],
+      "manteiga": [],
+      "tomate": [],
+      "azeitona": [
+        "azeitonas"
+      ],
+      "goiabada": [],
+      "kefir": [
+        "iogurte"
+      ],
+      "queijo": [
+        "queijo fatiado",
+        "queijo flamengo"
+      ],
+      "bacon": [],
+      "limão": [],
+      "maionese": [],
+      "molho de tomate": [
+        "polpa de tomate"
+      ],
+      "mousse de chocolate": [
+        "mousse",
+        "sobremesa de chocolate"
+      ],
+      "fiambre": []
+    },
+    "_duvidas": []
+  },
+  "foto-07.jpg": {
+    "_descricao": "Fruteira na bancada",
+    "ingredients": {
+      "laranja": [
+        "laranjas"
+      ],
+      "limão": [
+        "limões",
+        "lima"
+      ],
+      "romã": [
+        "romãs"
+      ],
+      "abacate": [],
+      "dióspiro": [
+        "diospiro",
+        "caqui"
+      ]
+    },
+    "_duvidas": []
   }
 }
