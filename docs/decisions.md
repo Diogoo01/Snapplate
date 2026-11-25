@@ -17,6 +17,7 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [006](#adr-006--ambiente-de-desenvolvimento-android-studio--claude-code) | Ambiente de desenvolvimento: Android Studio + Claude Code | Aceite | 2026-11-24 |
 | [007](#adr-007--política-de-merge-o-claude-faz-merge-após-aprovação-explícita) | Política de merge: o Claude faz merge após aprovação explícita | Aceite | 2026-11-24 |
 | [008](#adr-008--ci-um-único-job-gradle-no-github-actions) | CI: um único job Gradle no GitHub Actions | Aceite | 2026-11-24 |
+| [009](#adr-009--modelo-de-visão-gemini-35-flash-lite-via-gemini-api) | Modelo de visão: Gemini 3.5 Flash-Lite via Gemini API | Aceite | 2026-11-25 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
@@ -28,7 +29,6 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | D8 | Rede e serialização | D11 |
 | D9 | Captura de imagem | S6 |
 | D10 | Persistência | — |
-| D11 | LLM para identificar ingredientes | S1, S2 |
 | D12 | Backend / proteção da chave | S5 |
 | D13 | Origem das receitas | S4 |
 | D14 | Cálculo de calorias | S4 |
@@ -289,3 +289,48 @@ forma do workflow definitivo (decisão D19).
 - A proteção da `main` passa a exigir este check verde.
 - O workflow é criado na Fase 2, com o projeto Android definitivo; nessa altura
   revê-se a ADR-007 (auto-merge).
+
+---
+
+## ADR-009 — Modelo de visão: Gemini 3.5 Flash-Lite via Gemini API
+- **Estado:** Aceite
+- **Data:** 2026-11-25
+- **Spike relacionado:** [docs/spikes/001-gemini-vision.md](spikes/001-gemini-vision.md)
+  (#4) e [002-llm-alternatives.md](spikes/002-llm-alternatives.md) (#8)
+
+### Contexto
+A app precisa de um modelo de visão gratuito que identifique os ingredientes
+numa foto (decisão D11). Os spikes S1 e S2 compararam quatro modelos com 7
+fotos reais e duas versões do prompt.
+
+### Opções consideradas
+1. **`gemini-3.5-flash-lite` via Gemini API** — melhor acerto (71 %), ~2 s por
+   foto, poucas invenções; no EEE as fotos não são usadas para melhorar os
+   produtos. Contra: 503 ocasionais no plano gratuito; os termos exigem o
+   plano pago para disponibilizar a app a utilizadores no EEE.
+2. **`nvidia/nemotron-3.5-super-vl:free` via OpenRouter** — sempre disponível
+   no teste; acerto parecido (68 %). Contra: 25–40 s por foto; inventa mais
+   (21 extras com o prompt v2); 50–1000 pedidos/dia; o OpenRouter diz que os
+   modelos gratuitos não são para produção.
+3. **Modelos maiores (`gemini-3.8-flash`, `gemma-4-31b-it:free`)** — Contra:
+   quase sempre indisponíveis (503/429) no plano gratuito.
+
+### Decisão
+**`gemini-3.5-flash-lite` via Gemini API** (opção 1), com o prompt v2 como
+ponto de partida.
+
+### Consequências
+- O acerto (~71 %) fica abaixo do objetivo de 80 %: o passo de revisão do
+  utilizador é essencial e tem de ser rápido (destacar pouca confiança,
+  adicionar o que falta).
+- O fornecedor de LLM fica isolado atrás de uma interface na app, para se
+  poder trocar de modelo (ex.: OpenRouter) sem mexer no resto.
+- A app trata 503/429 com novas tentativas com espera e uma mensagem clara.
+- A proteção da chave depende do S5 (Firebase AI Logic / D12).
+- Os limites gratuitos são por projeto e partilhados por todos os
+  utilizadores: **15 pedidos/min e 500 pedidos/dia** (1 foto = 1 pedido).
+  Suficiente para desenvolvimento e testers; a rever antes de publicar.
+- **Risco aceite:** antes de publicar para utilizadores no EEE é preciso rever
+  a restrição dos termos (plano pago, outro fornecedor ou distribuição
+  limitada). Para desenvolvimento e aprendizagem, o plano gratuito serve.
+- O prompt continua a ser melhorado no S3, medido com o mesmo script.
