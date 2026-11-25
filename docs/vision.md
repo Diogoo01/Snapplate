@@ -15,9 +15,17 @@ utilizador, com as calorias por dose.
 - **Custo zero:** só serviços com plano gratuito.
 
 ## MVP
-1. **Foto** — tirar ou escolher uma foto.
+1. **Foto** — tirar ou escolher uma foto. Antes de tirar a foto, a app mostra
+   um aviso curto sobre como tirar uma boa foto aos ingredientes (boa luz,
+   porta aberta, ingredientes visíveis e não tapados).
 2. **Revisão de ingredientes** — a app identifica os ingredientes e o
    utilizador corrige (adicionar, remover, editar).
+   - Itens identificados com pouca confiança são destacados para o
+     utilizador confirmar ou corrigir.
+   - Se a foto não permitir identificar bem os ingredientes, a app pede
+     para tirar outra.
+   - A app não adivinha o que não se vê (ex.: conteúdo de recipientes
+     opacos): ignora esses itens ou pergunta ao utilizador.
 3. **Receitas** — sugestões adequadas ao tempo e aos objetivos, com calorias
    por dose.
 
