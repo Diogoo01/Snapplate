@@ -42,3 +42,7 @@ spike-s1/results/
 # --- Python ---
 __pycache__/
 *.pyc
+
+# Spike S3: virtual environment and generated results
+spike-s3/.venv/
+spike-s3/results/
