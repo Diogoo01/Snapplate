@@ -3,8 +3,17 @@
 Prompts versionados usados pela app. Cada alteração relevante a um prompt
 deve ser acompanhada de uma nova execução das avaliações ([evals.md](evals.md)).
 
-> Prompts definitivos dependem ainda de D13 e D15 (spikes S3–S4). Abaixo, o
-> prompt de identificação usado no spike S1, ponto de partida para a app.
+> O prompt das receitas depende ainda de D13 (spike S4). Abaixo, as versões do
+> prompt de identificação, da mais recente para a mais antiga.
+
+### identify-ingredients — v3 (spike S3)
+- **Objetivo:** como a v2, mais quantidade estimada e qualidade da foto.
+- **Modelo:** `gemini-3.5-flash-lite`, temperatura 0.
+- **Entrada:** uma foto (JPEG).
+- **Formato de saída (schema):** [`spike-s3/schema.json`](../../spike-s3/schema.json), enviado em `responseJsonSchema` ([ADR-010](../decisions.md#adr-010--formato-da-resposta-json-schema-na-api--validação-na-app)).
+- **Texto do prompt:** `PROMPT` em [`spike-s3/run.py`](../../spike-s3/run.py).
+- **Resultado das avaliações:** 50/50 respostas válidas; acerto médio 64 % (72 % sem schema) ([spike 003](../spikes/003-structured-output.md)).
+- **Alterações face à v2:** regras para `quantity` (número + unidade de uma lista fixa) e para `photoQuality`; schema na API.
 
 ### identify-ingredients — v2 (spike S1)
 - **Objetivo:** listar os alimentos e bebidas numa foto de frigorífico/despensa.
