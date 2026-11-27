@@ -18,6 +18,7 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | [007](#adr-007--política-de-merge-o-claude-faz-merge-após-aprovação-explícita) | Política de merge: o Claude faz merge após aprovação explícita | Aceite | 2026-11-24 |
 | [008](#adr-008--ci-um-único-job-gradle-no-github-actions) | CI: um único job Gradle no GitHub Actions | Aceite | 2026-11-24 |
 | [009](#adr-009--modelo-de-visão-gemini-35-flash-lite-via-gemini-api) | Modelo de visão: Gemini 3.5 Flash-Lite via Gemini API | Aceite | 2026-11-25 |
+| [010](#adr-010--formato-da-resposta-json-schema-na-api--validação-na-app) | Formato da resposta: JSON Schema na API + validação na app | Aceite | 2026-11-27 |
 
 ## Decisões por tomar
 | ID | Decisão | Depende de |
@@ -32,7 +33,6 @@ mudar, cria-se uma nova ADR que a **substitui** e a antiga passa a
 | D12 | Backend / proteção da chave | S5 |
 | D13 | Origem das receitas | S4 |
 | D14 | Cálculo de calorias | S4 |
-| D15 | Formato da resposta da LLM | S3 |
 | D16 | Testes unitários | — |
 | D17 | Testes de UI | S8 |
 | D18 | Lint e formatação | — |
@@ -334,3 +334,39 @@ ponto de partida.
   a restrição dos termos (plano pago, outro fornecedor ou distribuição
   limitada). Para desenvolvimento e aprendizagem, o plano gratuito serve.
 - O prompt continua a ser melhorado no S3, medido com o mesmo script.
+
+---
+
+## ADR-010 — Formato da resposta: JSON Schema na API + validação na app
+- **Estado:** Aceite
+- **Data:** 2026-11-27
+- **Spike relacionado:** [docs/spikes/003-structured-output.md](spikes/003-structured-output.md) (#5)
+
+### Contexto
+A app tem de ler automaticamente a resposta do modelo de visão (decisão D15).
+Uma resposta fora do formato faz a app falhar. O spike S3 comparou 50
+chamadas só com o formato descrito no prompt com 50 chamadas com o JSON
+Schema enviado na API.
+
+### Opções consideradas
+1. **JSON Schema na API (`responseJsonSchema`) + validação na app** — 0
+   respostas inválidas em 50. Contra: acerto mais baixo no teste (64 % vs
+   72 %), possivelmente em parte variação.
+2. **Só prompt + validação + nova tentativa quando falha** — acerto um pouco
+   mais alto no teste. Contra: 6 % de respostas inválidas; cada falha gasta
+   mais um pedido dos 500 diários e mais espera.
+
+### Decisão
+**JSON Schema na API + validação na app** (opção 1).
+
+### Consequências
+- A resposta segue o schema de [`spike-s3/schema.json`](../spike-s3/schema.json):
+  `photoQuality` (`good`/`poor` + motivo) e `ingredients[]` com `name`,
+  `quantity` (`amount` + `unit` de uma lista fixa) e `confidence`.
+- Na revisão, a unidade é escolhida numa caixa de escolhas com os mesmos
+  valores do schema.
+- A app valida sempre a resposta, mesmo com schema na API; uma resposta
+  inválida é tratada como erro com mensagem ao utilizador.
+- A melhoria do acerto passa a ser trabalho de prompt, medido pelas
+  avaliações (D21).
+- `photoQuality` só é usado na app depois de testado com fotos más.

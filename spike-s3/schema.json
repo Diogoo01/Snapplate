@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "photoQuality": {
+      "type": "object",
+      "description": "Se a foto permite identificar bem os ingredientes.",
+      "properties": {
+        "rating": {
+          "type": "string",
+          "enum": ["good", "poor"]
+        },
+        "reason": {
+          "type": "string",
+          "description": "Motivo curto em português de Portugal (ex.: pouca luz, desfocada)."
+        }
+      },
+      "required": ["rating", "reason"],
+      "additionalProperties": false
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Nome genérico em português de Portugal, singular, minúsculas."
+          },
+          "quantity": {
+            "type": "object",
+            "description": "Quantidade estimada visível.",
+            "properties": {
+              "amount": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "unit": {
+                "type": "string",
+                "enum": ["unidade", "g", "kg", "ml", "l", "embalagem"]
+              }
+            },
+            "required": ["amount", "unit"],
+            "additionalProperties": false
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": ["name", "quantity", "confidence"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["photoQuality", "ingredients"],
+  "additionalProperties": false
+}
